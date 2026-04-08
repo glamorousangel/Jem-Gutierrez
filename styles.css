@@ -28,6 +28,124 @@ body {
 }
 
 /* ========================================
+   HEADER STYLES
+   Modern Minimalist Black-and-White Header
+   Fully Transparent Background
+   ======================================== */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: transparent;
+    z-index: 1000;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+    height: 100%;
+    padding: 0 40px;
+    margin: 0 auto;
+}
+
+/* Logo Wrapper */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logo-image {
+    height: 50px;
+    width: auto;
+    filter: invert(1) brightness(1.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.logo-wrapper:hover .logo-image {
+    filter: invert(1) brightness(1);
+    transform: scale(1.08);
+}
+
+/* TikTok Button */
+.tiktok-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: visible;
+}
+
+.tiktok-btn:hover {
+    transform: translateY(-3px);
+}
+
+.tiktok-icon {
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.tiktok-btn:hover .tiktok-icon {
+    transform: scale(1.15);
+}
+
+/* ========================================
+   RESPONSIVE HEADER
+   ======================================== */
+
+@media (max-width: 768px) {
+    .header-container {
+        padding: 0 24px;
+    }
+
+    .logo-image {
+        height: 40px;
+    }
+
+    .tiktok-icon {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        height: 65px;
+    }
+
+    .header-container {
+        padding: 0 16px;
+    }
+
+    .logo-image {
+        height: 36px;
+    }
+
+    .tiktok-icon {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+
+
+/* ========================================
    SECTION 1: HERO SECTION
    60% viewport height - bold visual impact
    ======================================== */
@@ -85,7 +203,7 @@ body {
 }
 
 .hero-logo {
-    max-width: 140px;
+    max-width: 200px;
     width: 100%;
     height: auto;
     filter: brightness(0) invert(1);
@@ -103,59 +221,162 @@ body {
 }
 
 /* ========================================
-   GLASSMORPHISM BASE CONTAINER
+   UNIFIED GLASSMORPHIC CONTAINER SYSTEM
+   All sections 2-5 contained in single overlay
    ======================================== */
 
+/* Main unified container wrapper */
+.unified-glass-layer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    top: 0;
+    background: rgba(10, 10, 15, 0.45);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 40px 40px 0 0;
+    box-shadow: 
+        0 -30px 80px rgba(0, 0, 0, 0.35),
+        0 0 1px rgba(255, 255, 255, 0.02),
+        inset 0 1px 20px rgba(255, 255, 255, 0.08),
+        inset 0 0 60px rgba(255, 255, 255, 0.03);
+    z-index: 50;
+    overflow: visible;
+    will-change: transform;
+    
+    /* Contains all sections 2-5; positioned via JavaScript */
+    min-height: auto;
+}
+
+/* Smooth glassmorphism surface */
+.unified-glass-layer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+    pointer-events: none;
+}
+
+/* 3D depth effect */
+.unified-glass-layer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at center top,
+        rgba(255, 255, 255, 0.05) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    border-radius: 40px 40px 0 0;
+}
+
 .glass-container {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1.5px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 48px 32px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
     position: relative;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-container:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    transform: translateY(-4px);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+/* ========================================
+   SECTION TITLES
+   Stylish, TikTok-inspired headings
+   ======================================== */
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 40px 0;
+    padding: 0;
+    line-height: 1.2;
+    text-transform: capitalize;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.9)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleFadeIn 0.8s ease-out;
+}
+
+@keyframes titleFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-title {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 2.4rem;
 }
 
 /* ========================================
    SECTION 2: INTRO CONTAINER
-   Full-width floating container only
+   Inside unified glassmorphic layer
    ======================================== */
 
 .intro-section {
     position: relative;
     background-color: transparent;
     padding: 60px 0;
-    margin-top: -60px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     z-index: 10;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
+    margin: 0;
 }
 
 .intro-container {
     width: 100%;
     max-width: 100%;
     padding: 48px 32px;
-    animation: containerSlideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: none;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .intro-text {
     font-size: 1rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 400;
     margin: 0;
 }
@@ -173,19 +394,19 @@ body {
 
 /* ========================================
    SECTION 3: GALLERY CAROUSEL
-   Stacked Card Layout with 3D Depth
-   Manual navigation with infinite loop
+   Inside unified glassmorphic layer
    ======================================== */
 
 .gallery-section {
-    padding: 120px 0;
-    background-color: #000;
+    padding: 60px 0;
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: visible;
     perspective: 1000px;
     width: 100%;
+    margin: 0;
 }
 
 .carousel-container {
@@ -346,36 +567,43 @@ body {
 
 /* ========================================
    SECTION 4: CONTENT SECTION
-   Clean, minimal layout
+   Inside unified glassmorphic layer
    ======================================== */
 
 .content-section {
-    padding: 100px 20px;
-    background-color: #000;
+    padding: 60px 20px;
+    background-color: transparent;
     display: flex;
     justify-content: center;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
     box-sizing: border-box;
+    margin: 0;
 }
 
 .content-wrapper {
     width: 100%;
-    max-width: 92%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .content-description {
     font-size: 1rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 400;
-    margin-bottom: 50px;
-    max-width: 90%;
+    margin: 0;
+    max-width: 100%;
 }
 
 .content-image {
     width: 100%;
-    border-radius: 8px;
+    max-width: 280px;
+    border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
     animation: contentImageAppear 0.8s ease-out;
@@ -400,22 +628,23 @@ body {
 
 /* ========================================
    SECTION 5: FOOTER
-   Minimal one-line footer
+   Inside unified glassmorphic layer
    ======================================== */
 
 .footer {
-    background-color: #000;
+    background-color: transparent;
     padding: 30px 20px;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: none;
     width: 100%;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: visible;
+    margin: 0;
 }
 
 .footer p {
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.5);
     letter-spacing: 0.5px;
     font-weight: 300;
     margin: 0;
@@ -425,32 +654,17 @@ body {
    RESPONSIVE DESIGN - MOBILE FIRST
    ======================================== */
 
-/* Mobile Base Styles (under 640px) */
-.carousel-container {
-    height: 420px;
-    padding: 0 16px;
-    box-sizing: border-box;
-}
+/* Mobile Base Styles - Two column layout */
+@media (max-width: 767px) {
+    .content-wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
 
-.carousel-item {
-    width: 280px;
-    height: 340px;
-}
-
-.carousel-item.prev {
-    transform: translateX(calc(-100% - 16px)) scale(0.7) translateZ(-50px);
-}
-
-.carousel-item.next {
-    transform: translateX(calc(100% + 16px)) scale(0.7) translateZ(-50px);
-}
-
-.carousel-item.far-prev {
-    transform: translateX(calc(-200% - 32px)) scale(0.45) translateZ(-100px);
-}
-
-.carousel-item.far-next {
-    transform: translateX(calc(200% + 32px)) scale(0.45) translateZ(-100px);
+    .content-image {
+        max-width: 100%;
+        margin: 0;
+    }
 }
 
 /* Very small mobile (under 480px) */
@@ -489,8 +703,17 @@ body {
 
 /* Tablet: 640px and up */
 @media (min-width: 640px) {
+    .unified-glass-layer {
+        border-radius: 48px 48px 0 0;
+    }
+
     .hero-logo {
-        max-width: 160px;
+        max-width: 220px;
+    }
+
+    .section-title {
+        font-size: 2.6rem;
+        margin-bottom: 48px;
     }
 
     .intro-container {
@@ -539,9 +762,17 @@ body {
 
 /* Tablet: 768px and up */
 @media (min-width: 768px) {
+    .unified-glass-layer {
+        border-radius: 50px 50px 0 0;
+    }
+
+    .section-title {
+        font-size: 2.8rem;
+        margin-bottom: 52px;
+    }
+
     .intro-section {
         padding: 80px 0;
-        margin-top: -80px;
     }
 
     .intro-container {
@@ -553,13 +784,17 @@ body {
     }
 
     .gallery-section {
-        padding: 120px 0;
+        padding: 80px 0;
     }
 
     .carousel-container {
         height: 500px;
         padding: 0 30px;
         box-sizing: border-box;
+    }
+
+    .content-wrapper {
+        grid-template-columns: 1fr 0.9fr;
     }
 
     .carousel-item {
@@ -588,7 +823,12 @@ body {
     }
 
     .content-wrapper {
-        max-width: 82%;
+        max-width: 100%;
+        gap: 60px;
+    }
+
+    .content-description {
+        font-size: 1.05rem;
     }
 
     .content-description {
@@ -599,17 +839,25 @@ body {
 
 /* Laptop: 1024px and up */
 @media (min-width: 1024px) {
+    .unified-glass-layer {
+        border-radius: 52px 52px 0 0;
+    }
+
+    .section-title {
+        font-size: 3.2rem;
+        margin-bottom: 56px;
+    }
+
     .hero {
         height: 60vh;
     }
 
     .hero-logo {
-        max-width: 180px;
+        max-width: 240px;
     }
 
     .intro-section {
         padding: 100px 0;
-        margin-top: -100px;
     }
 
     .intro-container {
@@ -623,7 +871,7 @@ body {
     }
 
     .gallery-section {
-        padding: 140px 20px;
+        padding: 100px 20px;
     }
 
     .carousel-container {
@@ -655,17 +903,22 @@ body {
     }
 
     .content-section {
-        padding: 140px 40px;
+        padding: 100px 40px;
     }
 
     .content-wrapper {
-        max-width: 80%;
+        max-width: 100%;
+        gap: 70px;
     }
 
     .content-description {
         font-size: 1.15rem;
-        margin-bottom: 70px;
-        max-width: 85%;
+        margin: 0;
+        max-width: 100%;
+    }
+
+    .content-image {
+        max-width: 380px;
     }
 
     .footer {
@@ -675,6 +928,15 @@ body {
 
 /* Desktop: 1440px and up */
 @media (min-width: 1440px) {
+    .unified-glass-layer {
+        border-radius: 54px 54px 0 0;
+    }
+
+    .section-title {
+        font-size: 3.4rem;
+        margin-bottom: 60px;
+    }
+
     .intro-container {
         max-width: 78%;
     }

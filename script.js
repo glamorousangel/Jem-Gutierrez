@@ -7,6 +7,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     initializeCarousel();
     initializeScrollAnimations();
+    initializeGlassLayerParallax();
 });
 
 /* ========================================
@@ -143,6 +144,67 @@ function initializeCarousel() {
 
     // Initialize first position
     updateCardPositions();
+}
+
+/* ========================================
+   GLASS LAYER PARALLAX SCROLL EFFECT
+   Smooth upward movement of unified container
+   Creates layered/parallax effect with background
+   ======================================== */
+
+function initializeGlassLayerParallax() {
+    const glassLayer = document.querySelector('.unified-glass-layer');
+    const heroSection = document.querySelector('.hero');
+    
+    if (!glassLayer || !heroSection) return;
+
+    function updateGlassLayerPosition() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const heroHeight = heroSection.offsetHeight;
+        const viewportHeight = window.innerHeight;
+        
+        // Show ~42% of container on initial load (slightly more for peek effect into hero)
+        const containerVisiblePercent = 0.42;
+        const containerVisibleHeight = Math.min(viewportHeight * containerVisiblePercent, 480);
+        
+        // Calculate initial position to show container peeking into hero on initial load
+        // Position container so exact amount is visible at bottom of viewport
+        const initialTopPosition = viewportHeight - containerVisibleHeight;
+        
+        // As you scroll, container moves up at 1x scroll speed (parallax effect)
+        const parallaxFactor = 1;
+        const newTop = Math.max(heroHeight, initialTopPosition - (scrollTop * parallaxFactor));
+        
+        glassLayer.style.top = `${newTop}px`;
+    }
+
+    // Smooth scroll listener with RAF
+    let ticking = false;
+    const scrollListener = () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateGlassLayerPosition();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    };
+
+    window.addEventListener('scroll', scrollListener, { passive: true });
+
+    // Handle resize
+    let resizeTimer;
+    const resizeListener = () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            updateGlassLayerPosition();
+        }, 100);
+    };
+    
+    window.addEventListener('resize', resizeListener);
+
+    // Initial position
+    updateGlassLayerPosition();
 }
 
 /* ========================================

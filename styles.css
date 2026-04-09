@@ -25,6 +25,12 @@ body {
     color: #fff;
     line-height: 1.5;
     overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 /* ========================================
@@ -77,6 +83,43 @@ body {
     transform: scale(1.08);
 }
 
+/* Social Links Container */
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Instagram Button */
+.instagram-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: visible;
+}
+
+.instagram-btn:hover {
+    transform: translateY(-3px);
+}
+
+.instagram-icon {
+    width: 75px;
+    height: 75px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.instagram-btn:hover .instagram-icon {
+    transform: scale(1.15);
+}
+
 /* TikTok Button */
 .tiktok-btn {
     display: inline-flex;
@@ -118,6 +161,11 @@ body {
         height: 40px;
     }
 
+    .instagram-icon {
+        width: 44px;
+        height: 44px;
+    }
+
     .tiktok-icon {
         width: 36px;
         height: 36px;
@@ -137,6 +185,11 @@ body {
         height: 36px;
     }
 
+    .instagram-icon {
+        width: 40px;
+        height: 40px;
+    }
+
     .tiktok-icon {
         width: 32px;
         height: 32px;
@@ -152,14 +205,13 @@ body {
 
 .hero {
     position: relative;
-    height: 60vh;
-    min-height: 400px;
+    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    width: 100%;
-}
+    width: 100%;}
 
 .hero-background {
     position: absolute;
@@ -169,7 +221,7 @@ body {
     height: 100%;
     background-image: url('img/mami/1.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center 25%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     z-index: 1;
@@ -244,9 +296,18 @@ body {
     z-index: 50;
     overflow: visible;
     will-change: transform;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     
     /* Contains all sections 2-5; positioned via JavaScript */
     min-height: auto;
+}
+
+.unified-glass-layer::-webkit-scrollbar {
+    display: none;
 }
 
 /* Smooth glassmorphism surface */
@@ -357,9 +418,10 @@ body {
     justify-content: center;
     align-items: flex-start;
     z-index: 10;
-    width: 100%;
+    width: 90%;
+    max-width: 1200px;
     overflow: visible;
-    margin: 0;
+    margin: 0 auto;
 }
 
 .intro-container {
@@ -401,12 +463,14 @@ body {
     padding: 60px 0;
     background-color: transparent;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: visible;
     perspective: 1000px;
-    width: 100%;
-    margin: 0;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .carousel-container {
@@ -575,10 +639,11 @@ body {
     background-color: transparent;
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 90%;
+    max-width: 1200px;
     overflow: visible;
     box-sizing: border-box;
-    margin: 0;
+    margin: 0 auto;
 }
 
 .content-wrapper {
@@ -592,7 +657,7 @@ body {
 }
 
 .content-description {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.85);
     font-weight: 400;
@@ -636,10 +701,11 @@ body {
     padding: 30px 20px;
     text-align: center;
     border-top: none;
-    width: 100%;
+    width: 90%;
+    max-width: 1200px;
     box-sizing: border-box;
     overflow: visible;
-    margin: 0;
+    margin: 0 auto;
 }
 
 .footer p {
@@ -849,7 +915,7 @@ body {
     }
 
     .hero {
-        height: 60vh;
+        height: 100vh;
     }
 
     .hero-logo {
